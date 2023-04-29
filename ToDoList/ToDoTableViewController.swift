@@ -15,7 +15,7 @@ class ToDoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //проверка наличия сохраненных данных при первом запуске приложения, если их нет, подгрузить пример
+        // Проверка наличия сохраненных данных при первом запуске приложения, если их нет, подгрузить пример
         if let savedToDos = ToDo.loadToDos() {
             toDos = savedToDos
         } else {
@@ -24,8 +24,8 @@ class ToDoTableViewController: UITableViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Раскомментированный шаблон для создания кнопки в баре
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -42,9 +42,6 @@ class ToDoTableViewController: UITableViewController {
         var content = cell.defaultContentConfiguration()
         content.text = toDo.title
         cell.contentConfiguration = content
-        
-        // Создаем кнопку в таббаре через код. Кнопка будет умной "из коробки"
-        navigationItem.leftBarButtonItem = editButtonItem
         
         return cell
     }
