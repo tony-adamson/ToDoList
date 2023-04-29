@@ -9,6 +9,7 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
 
+    // Определяем переменную как массив списка дел
     var toDos = [ToDo]()
     
     override func viewDidLoad() {
@@ -42,29 +43,29 @@ class ToDoTableViewController: UITableViewController {
         content.text = toDo.title
         cell.contentConfiguration = content
         
+        // Создаем кнопку в таббаре через код. Кнопка будет умной "из коробки"
+        navigationItem.leftBarButtonItem = editButtonItem
+        
         return cell
     }
 
-
-    /*
     // Override to support conditional editing of the table view.
+    // Активируем функциональность для удаления ячейки по свайпу
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        // Проверяем, что метод вызван именно кнопкой Delete
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            toDos.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
-    */
+
 
     /*
     // Override to support rearranging the table view.
