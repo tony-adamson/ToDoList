@@ -81,9 +81,15 @@ class ToDoTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
-    // Метод для возвращения после создания события
-    @IBAction func unwindToDoList(segue: UIStoryboardSegue) {
-        
+    // Метод для ввода подготовленных данных
+    @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
+        guard segue.identifier == "saveUnwind" else { return }
+        let sourceViewController = segue.source as! ToDoDetailTableViewController
+        if let toDo = sourceViewController.toDo {
+            let newIndexPath = IndexPath(row: toDos.count, section: 0)
+            toDos.append(toDo)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
