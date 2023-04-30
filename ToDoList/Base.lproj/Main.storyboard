@@ -46,7 +46,7 @@
         <!--New To-Do-->
         <scene sceneID="qQe-aV-UdY">
             <objects>
-                <tableViewController id="NGr-8W-oDK" sceneMemberID="viewController">
+                <tableViewController id="NGr-8W-oDK" customClass="ToDoDetailTableViewController" customModule="ToDoList" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="NSA-z0-k48">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,11 +73,18 @@
                                                     <state key="selected" image="checkmark.circle.fill" catalog="system">
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="isCompleteButtonTapped:" destination="NGr-8W-oDK" eventType="touchUpInside" id="ecI-Fk-4Rc"/>
+                                                    </connections>
                                                 </button>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Remind me to..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h0z-OP-6hE">
                                                     <rect key="frame" x="64.666666666666657" y="11" width="308.33333333333337" height="34.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="returnPressed:" destination="NGr-8W-oDK" eventType="primaryActionTriggered" id="6NJ-Rr-Wia"/>
+                                                        <action selector="textEditingChanged:" destination="NGr-8W-oDK" eventType="editingChanged" id="Ktf-VR-VmB"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -126,8 +133,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="238.33332824707031"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="1hx-wh-BMA">
-                                                    <rect key="frame" x="20" y="11" width="353" height="216.33333333333334"/>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="1hx-wh-BMA">
+                                                    <rect key="frame" x="20" y="11" width="353" height="217"/>
+                                                    <connections>
+                                                        <action selector="dataPickerChanged:" destination="NGr-8W-oDK" eventType="valueChanged" id="NNc-9w-Lzy"/>
+                                                    </connections>
                                                 </datePicker>
                                             </subviews>
                                             <constraints>
@@ -185,6 +195,14 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="dueDateDatePicker" destination="1hx-wh-BMA" id="lKx-Sc-3PE"/>
+                        <outlet property="dueDateLabel" destination="DNT-Ms-Zzx" id="V8c-ho-VtI"/>
+                        <outlet property="isCompleteButton" destination="SRr-yr-nSv" id="7R4-ht-nTq"/>
+                        <outlet property="notesTextView" destination="BRX-q3-Xcv" id="bvv-4N-Npf"/>
+                        <outlet property="saveButton" destination="zDx-xl-2zt" id="7la-b8-oNe"/>
+                        <outlet property="titleTextField" destination="h0z-OP-6hE" id="GkX-1e-T6F"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivC-Zw-JJn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="9et-o3-PBD" userLabel="Exit" sceneMemberID="exit"/>
