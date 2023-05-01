@@ -17,14 +17,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="dN0-l8-KMg">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ToDoCellIdentifier" id="dN0-l8-KMg" customClass="ToDoCellTableViewCell" customModule="ToDoList" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="393" height="42.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dN0-l8-KMg" id="LzQ-Oi-9DI">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="42.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9xZ-NF-UmS">
+                                            <rect key="frame" x="19.999999999999996" y="7.6666666666666661" width="34.666666666666657" height="27.333333333333336"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="34.670000000000002" id="t8E-Yy-10S"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Button" image="checkmark.circle" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <state key="selected" image="checkmark.circle.fill" catalog="system">
+                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="24"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="completeButtonTapped:" destination="dN0-l8-KMg" eventType="touchUpInside" id="V2c-ju-GXs"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQl-9L-QDq">
+                                            <rect key="frame" x="62.666666666666629" y="11.000000000000002" width="310.33333333333337" height="20.666666666666671"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="kQl-9L-QDq" secondAttribute="bottom" id="68F-hf-RC9"/>
+                                        <constraint firstItem="9xZ-NF-UmS" firstAttribute="centerY" secondItem="LzQ-Oi-9DI" secondAttribute="centerY" id="6f8-BP-s0B"/>
+                                        <constraint firstItem="kQl-9L-QDq" firstAttribute="leading" secondItem="9xZ-NF-UmS" secondAttribute="trailing" constant="8" id="9UF-iA-zjP"/>
+                                        <constraint firstItem="kQl-9L-QDq" firstAttribute="centerY" secondItem="LzQ-Oi-9DI" secondAttribute="centerY" id="RX9-P5-SOT"/>
+                                        <constraint firstItem="kQl-9L-QDq" firstAttribute="top" secondItem="LzQ-Oi-9DI" secondAttribute="topMargin" id="UTN-aa-lBF"/>
+                                        <constraint firstItem="9xZ-NF-UmS" firstAttribute="leading" secondItem="LzQ-Oi-9DI" secondAttribute="leadingMargin" id="gD8-Km-mFa"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="kQl-9L-QDq" secondAttribute="trailing" id="uCJ-CF-a3s"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="isCompleteButton" destination="9xZ-NF-UmS" id="DD8-7c-SwT"/>
+                                    <outlet property="titleLabel" destination="kQl-9L-QDq" id="f1X-Th-WQL"/>
                                     <segue destination="Ohm-bI-3Py" kind="presentation" id="M1V-le-1hf"/>
                                 </connections>
                             </tableViewCell>

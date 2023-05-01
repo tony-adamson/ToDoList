@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ToDoTableViewController: UITableViewController {
-
+class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
+    
     // Определяем переменную как массив списка дел
     var toDos = [ToDo]()
     
@@ -53,12 +53,14 @@ class ToDoTableViewController: UITableViewController {
 
     // Конфигурируем ячейки, в ячейке будет отобрадаться только заголовок
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath)
+        // Стандартная инициализация заменена на специальную, использующую новый файл cocoa для ячеек
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! ToDoCellTableViewCell
 
         let toDo = toDos[indexPath.row]
-        var content = cell.defaultContentConfiguration()
-        content.text = toDo.title
-        cell.contentConfiguration = content
+        // Убрана конфигурация, поскольку теперь ячейка сконфигурирована вручную
+        cell.titleLabel?.text = toDo.title
+        cell.isCompleteButton.isSelected = toDo.isComplete
+        cell.delegate = self
         
         return cell
     }
@@ -122,4 +124,13 @@ class ToDoTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     //}
 
+    // Для соответствия протоколу делегата ToDoCellDelegate
+    func checkmarkTapped(sender: ToDoCellTableViewCell) {
+        if let indexPath = tableView.indexPath(for: sender) {
+            var toDo = toDos[indexPath.row]
+            toDo.isComplete.toggle()
+            toDos[indexPath.row] = toDo
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+    }
 }
