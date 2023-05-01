@@ -79,6 +79,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             // Delete the row from the data source
             toDos.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .automatic)
+            // Сохраняем измененный массив при редактировании списка
+            ToDo.saveToDos(toDos)
         }
     }
 
@@ -116,6 +118,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
         }
+        // Cохраняем по нажатию кнопки сохранить
+        ToDo.saveToDos(toDos)
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -131,6 +135,8 @@ class ToDoTableViewController: UITableViewController, ToDoCellDelegate {
             toDo.isComplete.toggle()
             toDos[indexPath.row] = toDo
             tableView.reloadRows(at: [indexPath], with: .automatic)
+            // Сохранение по нажатию кнопки в ячейке
+            ToDo.saveToDos(toDos)
         }
     }
 }
