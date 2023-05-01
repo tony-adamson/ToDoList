@@ -27,14 +27,31 @@ class ToDoTableViewController: UITableViewController {
         // Раскомментированный шаблон для создания кнопки в баре
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
-
+    
+    // Метод для редактирования выбранной ячейки из общего списка. получен протягиванием связи между нави и тудутейблвьюконтроллер
+    @IBSegueAction func editToDo(_ coder: NSCoder, sender: Any?) -> ToDoDetailTableViewController? {
+        let detailController = ToDoDetailTableViewController(coder: coder)
+        
+        guard let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+            // if sender is the add button, return an empty controller
+            return detailController
+        }
+        tableView.deselectRow(at: indexPath, animated: true)
+        detailController?.toDo = toDos[indexPath.row]
+        
+        return detailController
+    }
+    
+    
     // MARK: - Table view data source
 
+    // Настраиваем количество ячеек, оно будет равно количесву элемен во в массиве toDos
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return toDos.count
     }
 
+    // Конфигурируем ячейки, в ячейке будет отобрадаться только заголовок
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath)
 
@@ -81,14 +98,21 @@ class ToDoTableViewController: UITableViewController {
 
     // MARK: - Navigation
 
-    // Метод для ввода подготовленных данных
+    // Метод для ввода подготовленных данных и проверка, обновить существующие данные или создать новую ячейку
     @IBAction func unwindToToDoList(segue: UIStoryboardSegue) {
         guard segue.identifier == "saveUnwind" else { return }
+        
         let sourceViewController = segue.source as! ToDoDetailTableViewController
+        
         if let toDo = sourceViewController.toDo {
-            let newIndexPath = IndexPath(row: toDos.count, section: 0)
-            toDos.append(toDo)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let indexOfExistingToDo = toDos.firstIndex(of: toDo) {
+                toDos[indexOfExistingToDo] = toDo
+                tableView.reloadRows(at: [IndexPath(row: indexOfExistingToDo, section: 0)], with: .automatic)
+            } else {
+                let newIndexPath = IndexPath(row: toDos.count, section: 0)
+                toDos.append(toDo)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
     

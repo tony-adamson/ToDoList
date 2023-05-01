@@ -24,6 +24,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Ohm-bI-3Py" kind="presentation" id="M1V-le-1hf"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -186,12 +189,12 @@
                     <navigationItem key="navigationItem" title="New To-Do" largeTitleDisplayMode="never" id="G50-y1-XPX">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fZh-PH-DL2">
                             <connections>
-                                <segue destination="9et-o3-PBD" kind="unwind" unwindAction="unwindToDoListWithSegue:" id="VQN-Sl-MfH"/>
+                                <segue destination="9et-o3-PBD" kind="unwind" unwindAction="unwindToToDoListWithSegue:" id="W7F-ix-3tJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="zDx-xl-2zt">
                             <connections>
-                                <segue destination="9et-o3-PBD" kind="unwind" identifier="saveUnwind" unwindAction="unwindToDoListWithSegue:" id="g55-ha-45N"/>
+                                <segue destination="9et-o3-PBD" kind="unwind" identifier="saveUnwind" unwindAction="unwindToToDoListWithSegue:" id="iVd-9M-Egv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -218,7 +221,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="NGr-8W-oDK" kind="relationship" relationship="rootViewController" id="u0t-nX-lYH"/>
+                        <segue destination="NGr-8W-oDK" kind="relationship" relationship="rootViewController" destinationCreationSelector="editToDo:sender:" id="u0t-nX-lYH"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mxz-u1-xF0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -242,6 +245,9 @@
             <point key="canvasLocation" x="-856" y="-95"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="M1V-le-1hf"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="checkmark.circle" catalog="system" width="128" height="123"/>
         <image name="checkmark.circle.fill" catalog="system" width="128" height="123"/>
